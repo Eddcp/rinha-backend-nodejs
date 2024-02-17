@@ -1,0 +1,19 @@
+{
+  "name": "rinha-backend-eddcp-nodejs",
+  "version": "1.0.0",
+  "description": "Rinha backend 2024 q1",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "rinha"
+  ],
+  "author": "eddcp",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.26.1"
+  }
+}
