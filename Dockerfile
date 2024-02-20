@@ -2,13 +2,21 @@ FROM node:20-slim AS builder
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json /app
+COPY .env /app
 RUN npm ci
-COPY . .
-RUN npm run build
 
+# Start a new build stage
+FROM node:20-slim AS production
+ENV NODE_ENV production
 
-COPY --from=builder /app/node_modules /app/node_modules
-COPY --from=builder /app/dist /app/dist
+USER node
+WORKDIR /app
+COPY --chown=node:node --from=builder /app/package.json /app/package.json
+COPY --chown=node:node --from=builder /app/.env /app/.env
+COPY --chown=node:node . /app
+
+RUN ls -la
+
 # Start the server
 CMD ["npm", "run", "start"]
