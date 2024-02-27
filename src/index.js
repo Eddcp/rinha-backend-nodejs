@@ -9,12 +9,16 @@ const fastify = Fastify({
 fastify.register(apiRoutes)
 fastify.setErrorHandler((error, request, reply) => {
     if (error?.notFoundError) {
-        reply.status(404).send();
+        reply.status(404).send({
+            error: error.message
+        });
         return;
     }
 
     if (error?.unprocessableEntity) {
-        reply.status(422).send();
+        reply.status(422).send({
+            error: error.message
+        });
         return;
     }
     reply.send(error);

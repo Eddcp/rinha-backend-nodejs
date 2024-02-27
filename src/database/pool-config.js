@@ -17,7 +17,6 @@ const poolConnect = async () => {
 }
 
 const poolRelease = (client) => {
-    console.log( { client });
     if (client) {
         client.release();
     }
